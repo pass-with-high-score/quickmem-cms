@@ -4,7 +4,6 @@ import mongoose from 'mongoose';
 
 import { AppModule } from './app.module.js';
 import { setupAdminJS } from './admin/admin.setup.js';
-import { init } from '../../sources/mikroorm/config.js';
 
 const bootstrap = async () => {
   const app = await NestFactory.create(AppModule);
@@ -17,7 +16,6 @@ const bootstrap = async () => {
   );
 
   await mongoose.connect(process.env.MONGO_DATABASE_URL);
-  await init();
   await setupAdminJS(app);
 
   await app.listen(process.env.PORT);

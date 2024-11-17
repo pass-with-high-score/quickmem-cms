@@ -1,4 +1,3 @@
-import { init } from '../sources/mikroorm/config.js';
 import dataSource from '../sources/typeorm/config.js';
 import { generateAdminJSConfig } from '../admin/index.js';
 import { expressAuthenticatedRouter } from '../admin/router.js';
@@ -15,7 +14,6 @@ const start = async () => {
     });
 
     await mongoose.connect(process.env.MONGO_DATABASE_URL);
-    await init();
     await dataSource.initialize();
 
     const adminJS = generateAdminJSConfig();

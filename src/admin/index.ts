@@ -9,18 +9,7 @@ import { Database as TypeormDatabase, Resource as TypeormResource } from '@admin
 
 import AdminJS, { AdminJSOptions, ResourceOptions } from 'adminjs';
 import argon2 from 'argon2';
-import { CreateCarResource, CreateOwnerResource, CreateSellerResource } from '../sources/mikroorm/resources/index.js';
 import { AdminModel } from '../sources/mongoose/models/index.js';
-import {
-  CreateAdminResource,
-  CreateArticleResource,
-  CreateCategoryResource,
-  CreateCommentResource,
-  CreateComplicatedResource,
-  CreateUserResource,
-} from '../sources/mongoose/resources/index.js';
-import { CreateManagerResource, CreateOfficeResource } from '../sources/objectionjs/resources/index.js';
-import { CryptoDatabase } from '../sources/rest/crypto-database.js';
 import { CreateOrganizationResource, CreatePersonResource } from '../sources/typeorm/resources/index.js';
 import './components.bundler.js';
 import { componentLoader } from './components.bundler.js';
@@ -37,13 +26,7 @@ AdminJS.registerAdapter({ Database: SequelizeDatabase, Resource: SequelizeResour
 AdminJS.registerAdapter({ Database: TypeormDatabase, Resource: TypeormResource });
 
 export const menu: Record<string, ResourceOptions['navigation']> = {
-  mongoose: { name: 'Mongoose', icon: 'Folder' },
-  sequelize: { name: 'Sequelize', icon: 'Folder' },
-  typeorm: { name: 'Typeorm', icon: 'Folder' },
-  mikroorm: { name: 'Mikroorm', icon: 'Folder' },
-  prisma: { name: 'Prisma', icon: 'Folder' },
-  objection: { name: 'Objection', icon: 'Folder' },
-  rest: { name: 'REST', icon: 'Link' },
+  typeorm: { name: 'Quickmem', icon: 'Folder' },
 };
 
 export const generateAdminJSConfig: () => AdminJSOptions = () => ({
@@ -55,7 +38,7 @@ export const generateAdminJSConfig: () => AdminJSOptions = () => ({
     scripts: process.env.NODE_ENV === 'production' ? ['/gtm.js'] : [],
   },
   branding: {
-    companyName: 'AdminJS demo page',
+    companyName: 'Quickmem',
     favicon: '/favicon.ico',
     theme: {
       colors: { primary100: '#4D70EB' },
@@ -72,25 +55,9 @@ export const generateAdminJSConfig: () => AdminJSOptions = () => ({
     DOCUMENTATION_URL: process.env.DOCUMENTATION_URL,
   },
   resources: [
-    // mongo
-    CreateAdminResource(),
-    CreateUserResource(),
-    CreateCategoryResource(),
-    CreateArticleResource(),
-    CreateCommentResource(),
-    CreateComplicatedResource(),
     // typeorm
     CreateOrganizationResource(),
     CreatePersonResource(),
-    // mikroorm
-    CreateCarResource(),
-    CreateSellerResource(),
-    CreateOwnerResource(),
-    // objectionjs
-    CreateOfficeResource(),
-    CreateManagerResource(),
-    // custom
-    new CryptoDatabase(),
   ],
 });
 
