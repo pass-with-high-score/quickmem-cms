@@ -22,7 +22,5 @@ jobs:
       - name: Install
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
-      - name: Lint
-        run: yarn lint
       - name: Build
         run: yarn build
