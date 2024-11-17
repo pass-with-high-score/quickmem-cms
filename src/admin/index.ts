@@ -20,11 +20,6 @@ import {
   CreateUserResource,
 } from '../sources/mongoose/resources/index.js';
 import { CreateManagerResource, CreateOfficeResource } from '../sources/objectionjs/resources/index.js';
-import {
-  CreatePostResource,
-  CreateProfileResource,
-  CreatePublisherResource,
-} from '../sources/prisma/resources/index.js';
 import { CryptoDatabase } from '../sources/rest/crypto-database.js';
 import {
   CreateCartResource,
@@ -102,10 +97,6 @@ export const generateAdminJSConfig: () => AdminJSOptions = () => ({
     CreateCarResource(),
     CreateSellerResource(),
     CreateOwnerResource(),
-    // prisma
-    CreatePublisherResource(),
-    CreateProfileResource(),
-    CreatePostResource(),
     // objectionjs
     CreateOfficeResource(),
     CreateManagerResource(),
