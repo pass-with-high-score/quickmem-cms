@@ -8,11 +8,10 @@ import { PrismaService } from './prisma/prisma.service.js';
 import { params } from '../../sources/typeorm/config.js';
 import { MongooseSchemasModule } from './mongoose/mongoose.module.js';
 import config from '../../sources/mikroorm/config.js';
-import { databaseProviders } from './database.providers.js';
 
 @Module({
   imports: [MikroOrmModule.forRoot(config), TypeOrmModule.forRoot(params), MongooseSchemasModule],
   controllers: [AppController],
-  providers: [AppService, PrismaService, ...databaseProviders],
+  providers: [AppService, PrismaService],
 })
 export class AppModule {}

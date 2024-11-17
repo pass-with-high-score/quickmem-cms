@@ -21,12 +21,6 @@ import {
 } from '../sources/mongoose/resources/index.js';
 import { CreateManagerResource, CreateOfficeResource } from '../sources/objectionjs/resources/index.js';
 import { CryptoDatabase } from '../sources/rest/crypto-database.js';
-import {
-  CreateCartResource,
-  CreateOrderResource,
-  CreateProductResource,
-  CreateCategoryResource as CreateSequelizeCategoryResource,
-} from '../sources/sequelize/resources/index.js';
 import { CreateOrganizationResource, CreatePersonResource } from '../sources/typeorm/resources/index.js';
 import './components.bundler.js';
 import { componentLoader } from './components.bundler.js';
@@ -85,11 +79,6 @@ export const generateAdminJSConfig: () => AdminJSOptions = () => ({
     CreateArticleResource(),
     CreateCommentResource(),
     CreateComplicatedResource(),
-    // sequelize
-    CreateSequelizeCategoryResource(),
-    CreateProductResource(),
-    CreateOrderResource(),
-    CreateCartResource(),
     // typeorm
     CreateOrganizationResource(),
     CreatePersonResource(),
