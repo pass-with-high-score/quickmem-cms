@@ -21,7 +21,6 @@ override('components/sidebar-resource-section', 'SidebarResourceSection');
 /**
  * Common components
  */
-export const PRODUCTS_LIST = add('components/products-list', 'ProductList');
 export const DONT_TOUCH_THIS_ACTION = add('components/dont-touch-this-action', 'CustomAction');
 export const DETAILED_STATS = add('components/detailed-stats', 'DetailedStats');
 export const THUMB = add('components/thumb', 'Thumb');
