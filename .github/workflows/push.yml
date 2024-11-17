@@ -56,7 +56,6 @@ jobs:
           🌿 <b>Branch</b>: ${{ github.ref_name }}
           🔗 <b>Changes</b>: <a href='https://github.com/pass-with-high-score/quickmem-cms/commit/${{ github.sha }}'>View Changes</a>
           🛠 <b>Action</b>: <a href='https://github.com/pass-with-high-score/quickmem-cms/actions/runs/${{ github.run_id }}'>View Action</a>
-          🌐 <b>Link server</b>: <a href='https://api.quickmem.app/'>https://api.quickmem.app/</a>
           ----------------------------------------
           💪 Keep up the great work!" \
           --data "parse_mode=HTML" \
