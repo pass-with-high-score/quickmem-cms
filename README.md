@@ -1,101 +1,81 @@
-## AdminJS-example-app
-
-Example application using [adminjs](https://github.com/SoftwareBrothers/adminjs)
-
-## Demo
-
-You can check out the current demo version at: https://demo.adminjs.co
-
-Login: admin@example.com  
-Password: password
+# Quickmem Cms
 
 ## Prerequisites
 
-Install Docker if you don't have it: https://docs.docker.com/desktop/#download-and-install
+- Node.js >= 18
+- Yarn (optional)
 
-Run:
-```bash
-$ docker-compose up -d
-```
-to setup databases.
+## Installation
 
-Make sure your `.env` file is configured. If you didn't do any changes to `docker-compose.yml` file,
-the default contents of the `.env` file should work for you.
+1. Clone the repository:
 
-## Starting the app
+    ```sh
+    git clone https://github.com/pass-with-high-score/quickmem-cms.git
+    cd quickmem-cms
+    ```
 
-First, install all dependencies
+2. Install dependencies:
 
-```bash
-yarn install --frozen-lockfile
-```
+    ```sh
+    yarn install
+    ```
 
-Make sure you have all environmental variables set up (read the previous paragraph).
+## Building the Project
 
-Then create postgres database and run migrations:
+To build the project, run:
 
-```bash
-$ npx prisma generate     # # this sets up Prisma Client in your node_modules
-$ yarn migration:up
+```sh
+yarn build
 ```
 
-Note: If you see the error below when Prisma MySQL migration is run:
-```
-Error: P1017: Server has closed the connection.
-```
-Please wait a minute or two for the MySQL server to start and retry.
+This will clean the `dist` directory, compile the TypeScript files, and copy the theme files to the `dist` directory.
 
-In the end, you can launch the app
+## Running the Project
 
-```bash
-$ yarn build:watch      # keep it running if developing
-$ yarn start:dev        # in a separate terminal tab, concurrently
+To start the project in development mode with hot-reloading, run:
+
+```sh
+yarn start:dev
 ```
 
-By default the app will be available under: `http://localhost:3000/admin`
+To start the project in production mode, run:
 
-## Developing the app
+```sh
+yarn start
+```
 
-The best way of developing the app is to do this via https://github.com/SoftwareBrothers/adminjs-dev.
+## Additional Scripts
 
-Alternatively, you can fork and clone each repository separately and link them using:
+- **Linting**: To lint the project files, run:
 
-* `yarn link`
-* `npm link`
+    ```sh
+    yarn lint
+    ```
 
-to see your local changes.
+- **Database Migrations**: To run TypeORM migrations, run:
 
-#### Sequelize
-##### migrations
-- `yarn sequelize migration:generate --name init`
-- `yarn sequelize db:migrate`
-- `yarn sequelize db:migrate:undo`
+    ```sh
+    yarn typeorm migration:run
+    ```
 
-#### Typeorm
-##### migrations
-- `yarn typeorm migration:generate -n init`
-- `yarn typeorm migration:run`
-- `yarn typeorm migration:revert`
+- **Clean PostgreSQL Database**: To clean the PostgreSQL database, run:
 
+    ```sh
+    yarn postgres:clean
+    ```
 
-#### mikro-orm
-##### migrations
-- `yarn mikro-orm migration:create`
-- `yarn mikro-orm migration:up`
-- `yarn mikro-orm migration:down`
+- **Clean MongoDB Database**: To clean the MongoDB database, run:
 
-#### prisma
-- `npx prisma migrate dev --schema prisma/schema.prisma`
+    ```sh
+    yarn mongodb:clean
+    ```
+
+- **Watch for Changes**: To build the project and watch for changes, run:
+
+    ```sh
+    yarn build:watch
+    ```
 
 ## License
 
-AdminJS is copyrighted © 2023 rst.software. It is a free software, and may be redistributed under the terms specified in the [LICENSE](LICENSE.md) file.
-
-## About rst.software
-
-<img src="https://pbs.twimg.com/profile_images/1367119173604810752/dKVlj1YY_400x400.jpg" width=150>
-
-We’re an open, friendly team that helps clients from all over the world to transform their businesses and create astonishing products.
-
-* We are available for [hire](https://www.rst.software/estimate-your-project).
-* If you want to work for us - check out the [career page](https://www.rst.software/join-us).
+This project is licensed under the ISC License.
