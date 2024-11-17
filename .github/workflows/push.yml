@@ -1,26 +1,80 @@
 name: CI/CD
-on: push
+on:
+  push:
+    branches:
+      - main
+      - 'feat/*'
+      - 'dev/*'
+    pull_request:
+      branches:
+        - main
+        - 'feat/*'
+        - 'dev/*'
 
 jobs:
   test:
-    name: test
+    name: Test
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Setup
+
+      - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: "18.x"
-      - uses: actions/cache@v2
+
+      - name: Cache Node Modules
+        uses: actions/cache@v2
         id: yarn-cache
         with:
           path: node_modules
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node_modules-
-      - name: Install
+
+      - name: Install Dependencies
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
-      - name: Build
+
+      - name: Lint Code
+        run: yarn lint
+
+      - name: Build Project
         run: yarn build
+
+      - name: Send Telegram Notification on Success
+        if: success()
+        run: |
+          curl -s --data "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+          --data-urlencode "text=🚀 <b>QuickMem Cms Build Successfully!</b> 🎉🎉
+          ----------------------------------------
+          📂 <b>Repository</b>: ${{ github.repository }}
+          👤 <b>Committer</b>: ${{ github.actor }}
+          📝 <b>Commit Message</b>: ${{ github.event.head_commit.message }}
+          🌿 <b>Branch</b>: ${{ github.ref_name }}
+          🔗 <b>Changes</b>: <a href='https://github.com/pass-with-high-score/quickmem-cms/commit/${{ github.sha }}'>View Changes</a>
+          🛠 <b>Action</b>: <a href='https://github.com/pass-with-high-score/quickmem-cms/actions/runs/${{ github.run_id }}'>View Action</a>
+          🌐 <b>Link server</b>: <a href='https://api.quickmem.app/'>https://api.quickmem.app/</a>
+          ----------------------------------------
+          💪 Keep up the great work!" \
+          --data "parse_mode=HTML" \
+          https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage
+
+      - name: Send Telegram Notification on Failure
+        if: failure()
+        run: |
+          curl -s --data "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+          --data-urlencode "text=❌ <b>QuickMem Cms Build Failed</b> 😞
+          ----------------------------------------
+          📂 <b>Repository</b>: ${{ github.repository }}
+          👤 <b>Committer</b>: ${{ github.actor }}
+          📝 <b>Commit Message</b>: ${{ github.event.head_commit.message }}
+          🌿 <b>Branch</b>: ${{ github.ref_name }}
+          🔗 <b>Changes</b>: <a href='https://github.com/pass-with-high-score/quickmem-cms/commit/${{ github.sha }}'>View Changes</a>
+          🛠 <b>Action</b>: <a href='https://github.com/pass-with-high-score/quickmem-cms/actions/runs/${{ github.run_id }}'>View Action</a>
+          ----------------------------------------
+          ⚠️ Please review the error and try again." \
+          --data "parse_mode=HTML" \
+          https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage
