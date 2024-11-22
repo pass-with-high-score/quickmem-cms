@@ -8,7 +8,6 @@ import {
   UpdateDateColumn,
   Relation,
   BaseEntity,
-  RelationId,
 } from 'typeorm';
 import { Flashcards } from './flashcard.entity.js';
 

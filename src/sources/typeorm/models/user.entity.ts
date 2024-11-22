@@ -2,9 +2,11 @@ import {
   BaseEntity,
   Column,
   CreateDateColumn,
-  Entity, ManyToMany,
+  Entity,
+  ManyToMany,
   OneToMany,
-  PrimaryGeneratedColumn, RelationId, UpdateDateColumn,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { AuthProviderEnum } from '../enums/auth-provider.enum.js';
 import { UserRoleEnum } from '../enums/user-role.enum.js';

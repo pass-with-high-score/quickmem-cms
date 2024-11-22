@@ -4,7 +4,8 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany, BaseEntity,
+  OneToMany,
+  BaseEntity,
 } from 'typeorm';
 import { StudySets } from './study-set.entity.js';
 
