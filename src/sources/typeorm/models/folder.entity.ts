@@ -6,15 +6,17 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
-  PrimaryGeneratedColumn, Relation,
+  PrimaryGeneratedColumn,
+  Relation,
+  RelationId,
   UpdateDateColumn,
 } from 'typeorm';
-import { Users} from './user.entity.js';
+import { Users } from './user.entity.js';
 import { Classes } from './class.entity.js';
 import { StudySets } from './study-set.entity.js';
 
 @Entity('folders')
-export class Folders extends BaseEntity{
+export class Folders extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   public id: string;
 
@@ -39,10 +41,15 @@ export class Folders extends BaseEntity{
     joinColumn: { name: 'folder_id', referencedColumnName: 'id' },
     inverseJoinColumn: { name: 'class_id', referencedColumnName: 'id' },
   })
-  public classes: Classes[];
+  @RelationId((folder: Folders) => folder.classes)
+  public classes: Relation<Classes[]>;
 
   @ManyToMany(() => StudySets, (studySet) => studySet.folders)
   public studySets: StudySets[];
+
+  @Column()
+  @RelationId((folder: Folders) => folder.owner)
+  public ownerId: string;
 
   @CreateDateColumn()
   public createdAt: Date;

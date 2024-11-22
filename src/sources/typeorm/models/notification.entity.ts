@@ -6,12 +6,13 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   Relation,
+  RelationId,
   UpdateDateColumn,
 } from 'typeorm';
 import { Users } from './user.entity.js';
 
 @Entity('notifications')
-export class Notifications extends BaseEntity{
+export class Notifications extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   public id: string;
 
@@ -26,6 +27,10 @@ export class Notifications extends BaseEntity{
 
   @Column({ type: 'boolean', default: false })
   public isRead: boolean;
+
+  @Column()
+  @RelationId((notification: Notifications) => notification.user)
+  public userId: string;
 
   @CreateDateColumn()
   public createdAt: Date;

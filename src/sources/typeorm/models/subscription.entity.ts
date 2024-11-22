@@ -6,13 +6,14 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   Relation,
+  RelationId,
   UpdateDateColumn,
 } from 'typeorm';
 import { SubscriptionTypeEnum } from '../enums/subscription.enum.js';
 import { Users } from './user.entity.js';
 
 @Entity('subscriptions')
-export class Subscriptions extends BaseEntity{
+export class Subscriptions extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   public id: string;
 
@@ -49,6 +50,10 @@ export class Subscriptions extends BaseEntity{
 
   @Column({ default: true })
   public isAutoRenew: boolean;
+
+  @Column()
+  @RelationId((subscription: Subscriptions) => subscription.user)
+  public userId: string;
 
   @CreateDateColumn()
   public createdAt: Date;

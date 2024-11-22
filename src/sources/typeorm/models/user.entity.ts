@@ -4,7 +4,7 @@ import {
   CreateDateColumn,
   Entity, ManyToMany,
   OneToMany,
-  PrimaryGeneratedColumn, UpdateDateColumn,
+  PrimaryGeneratedColumn, RelationId, UpdateDateColumn,
 } from 'typeorm';
 import { AuthProviderEnum } from '../enums/auth-provider.enum.js';
 import { UserRoleEnum } from '../enums/user-role.enum.js';

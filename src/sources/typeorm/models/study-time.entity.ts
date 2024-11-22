@@ -6,6 +6,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   Relation,
+  RelationId,
   UpdateDateColumn,
 } from 'typeorm';
 import { LearnModeEnum } from '../enums/learn-mode.enum.js';
@@ -13,7 +14,7 @@ import { Users } from './user.entity.js';
 import { StudySets } from './study-set.entity.js';
 
 @Entity('study_time')
-export class StudyTimes extends BaseEntity{
+export class StudyTimes extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   public id: string;
 
@@ -32,6 +33,14 @@ export class StudyTimes extends BaseEntity{
     nullable: true,
   })
   public learnMode: LearnModeEnum;
+
+  @Column()
+  @RelationId((studyTime: StudyTimes) => studyTime.user)
+  public userId: string;
+
+  @Column()
+  @RelationId((studyTime: StudyTimes) => studyTime.studySet)
+  public studySetId: string;
 
   @CreateDateColumn()
   public createdAt: Date;

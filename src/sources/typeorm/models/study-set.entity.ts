@@ -1,12 +1,15 @@
 import {
   BaseEntity,
   Column,
-  CreateDateColumn, Entity,
+  CreateDateColumn,
+  Entity,
   JoinTable,
   ManyToMany,
   ManyToOne,
   OneToMany,
-  PrimaryGeneratedColumn, Relation,
+  PrimaryGeneratedColumn,
+  Relation,
+  RelationId,
   UpdateDateColumn,
 } from 'typeorm';
 import { Subjects } from './subject.entity.js';
@@ -61,6 +64,18 @@ export class StudySets extends BaseEntity {
 
   @OneToMany(() => StudyTimes, (studyTime) => studyTime.studySet)
   public studyTimes: StudyTimes[];
+
+  @Column()
+  @RelationId((studySet: StudySets) => studySet.owner)
+  public ownerId: string;
+
+  @Column()
+  @RelationId((studySet: StudySets) => studySet.subject)
+  public subjectId: string;
+
+  @Column()
+  @RelationId((studySet: StudySets) => studySet.color)
+  public colorId: number;
 
   @Column({ nullable: true })
   public link: string;

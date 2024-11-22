@@ -8,6 +8,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   Relation,
+  RelationId,
   UpdateDateColumn,
 } from 'typeorm';
 import { Users } from './user.entity.js';
@@ -32,6 +33,7 @@ export class Classes extends BaseEntity {
   public allowMemberManagement: boolean;
 
   @ManyToOne(() => Users, (user) => user.ownerClasses)
+  @RelationId((classes: Classes) => classes.owner)
   public owner: Relation<Users>;
 
   @ManyToMany(() => Folders, (folder) => folder.classes, {
@@ -53,6 +55,10 @@ export class Classes extends BaseEntity {
     inverseJoinColumn: { name: 'user_id', referencedColumnName: 'id' },
   })
   public members: Users[];
+
+  @Column()
+  @RelationId((classes: Classes) => classes.owner)
+  public ownerId: string;
 
   @Column()
   public joinToken: string;

@@ -6,6 +6,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   Relation,
+  RelationId,
   UpdateDateColumn,
 } from 'typeorm';
 import { ReportStatusEnum } from '../enums/report-status.enum.js';
@@ -13,7 +14,7 @@ import { ReportEnum } from '../enums/report.enum.js';
 import { Users } from './user.entity.js';
 
 @Entity('reports')
-export class Reports extends BaseEntity{
+export class Reports extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   public id: string;
 
@@ -36,6 +37,10 @@ export class Reports extends BaseEntity{
 
   @ManyToOne(() => Users, (user) => user.reports)
   public reporter: Relation<Users>;
+
+  @Column()
+  @RelationId((report: Reports) => report.reporter)
+  public reporterId: string;
 
   @CreateDateColumn()
   public createdAt: Date;

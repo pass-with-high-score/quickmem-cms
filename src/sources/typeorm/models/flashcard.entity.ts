@@ -5,7 +5,9 @@ import {
   Entity,
   ManyToOne,
   OneToOne,
-  PrimaryGeneratedColumn, Relation,
+  PrimaryGeneratedColumn,
+  Relation,
+  RelationId,
   UpdateDateColumn,
 } from 'typeorm';
 import { StudySets } from './study-set.entity.js';
@@ -69,6 +71,10 @@ export class Flashcards extends BaseEntity {
     onDelete: 'SET NULL',
   })
   public image: Images;
+
+  @Column()
+  @RelationId((flashcard: Flashcards) => flashcard.studySet)
+  public studySetId: string;
 
   @Column({ nullable: true, default: false })
   isAIGenerated: boolean;
