@@ -4,10 +4,8 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany,
   BaseEntity,
 } from 'typeorm';
-import { StudySets } from './study-set.entity.js';
 
 @Entity('colors')
 export class Colors extends BaseEntity {
@@ -25,7 +23,4 @@ export class Colors extends BaseEntity {
 
   @UpdateDateColumn()
   public updatedAt: Date;
-
-  @OneToMany(() => StudySets, (studySet) => studySet.color)
-  public studySets: StudySets[];
 }

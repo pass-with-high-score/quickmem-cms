@@ -12,8 +12,6 @@ import {
   RelationId,
   UpdateDateColumn,
 } from 'typeorm';
-import { Subjects } from './subject.entity.js';
-import { Colors } from './color.entity.js';
 import { Flashcards } from './flashcard.entity.js';
 import { Users } from './user.entity.js';
 import { Classes } from './class.entity.js';
@@ -30,12 +28,6 @@ export class StudySets extends BaseEntity {
 
   @Column()
   public description?: string;
-
-  @ManyToOne(() => Subjects, (subject) => subject.studySets)
-  public subject: Subjects;
-
-  @ManyToOne(() => Colors, (color) => color.studySets)
-  public color: Colors;
 
   @OneToMany(() => Flashcards, (flashcard) => flashcard.studySet)
   public flashcards: Flashcards[];
@@ -68,14 +60,6 @@ export class StudySets extends BaseEntity {
   @Column()
   @RelationId((studySet: StudySets) => studySet.owner)
   public ownerId: string;
-
-  @Column()
-  @RelationId((studySet: StudySets) => studySet.subject)
-  public subjectId: string;
-
-  @Column()
-  @RelationId((studySet: StudySets) => studySet.color)
-  public colorId: number;
 
   @Column({ nullable: true })
   public link: string;

@@ -8,5 +8,8 @@ export const CreateFlashcardResource: ResourceFunction<typeof Flashcards> = () =
   features: [useEnvironmentVariableToDisableActions()],
   options: {
     navigation: menu.typeorm,
+    edit: {
+      isAccessible: false,
+    },
   },
 });

@@ -8,5 +8,6 @@ export const CreateNotificationResource: ResourceFunction<typeof Notifications> 
   features: [useEnvironmentVariableToDisableActions()],
   options: {
     navigation: menu.typeorm,
+    editProperties: ['title', 'message'],
   },
 });

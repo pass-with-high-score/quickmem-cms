@@ -8,5 +8,8 @@ export const CreateFolderResource: ResourceFunction<typeof Folders> = () => ({
   features: [useEnvironmentVariableToDisableActions()],
   options: {
     navigation: menu.typeorm,
+    edit: {
+      isAccessible: false,
+    },
   },
 });

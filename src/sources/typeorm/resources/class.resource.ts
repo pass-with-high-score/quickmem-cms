@@ -8,5 +8,8 @@ export const CreateClassResource: ResourceFunction<typeof Classes> = () => ({
   features: [useEnvironmentVariableToDisableActions()],
   options: {
     navigation: menu.typeorm,
+    edit: {
+      isAccessible: false,
+    },
   },
 });

@@ -8,5 +8,16 @@ export const CreateUserResource: ResourceFunction<typeof Users> = () => ({
   features: [useEnvironmentVariableToDisableActions()],
   options: {
     navigation: menu.typeorm,
+    actions: {
+      edit: {
+        isAccessible: false,
+      },
+      delete: {
+        isAccessible: false,
+      },
+      bulkDelete: {
+        isAccessible: false,
+      }
+    }
   },
 });

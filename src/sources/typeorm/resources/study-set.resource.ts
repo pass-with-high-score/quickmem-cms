@@ -8,5 +8,8 @@ export const CreateStudySetResource: ResourceFunction<typeof StudySets> = () => 
   features: [useEnvironmentVariableToDisableActions()],
   options: {
     navigation: menu.typeorm,
+    edit: {
+      isAccessible: false,
+    },
   },
 });

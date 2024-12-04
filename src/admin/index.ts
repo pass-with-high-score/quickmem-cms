@@ -11,18 +11,11 @@ import { AuthUsers } from './constants/authUsers.js';
 import { customTheme } from '../themes/index.js';
 import { CreateUserResource } from '../sources/typeorm/resources/user.resource.js';
 import { CreateClassResource } from '../sources/typeorm/resources/class.resource.js';
-import { CreateColorResource } from '../sources/typeorm/resources/color.resource.js';
 import { CreateFlashcardResource } from '../sources/typeorm/resources/flashcard.resource.js';
 import { CreateFolderResource } from '../sources/typeorm/resources/folder.resource.js';
-import { CreateImageResource } from '../sources/typeorm/resources/image.resource.js';
 import { CreateNotificationResource } from '../sources/typeorm/resources/notification.resource.js';
 import { CreateReportResource } from '../sources/typeorm/resources/report.resource.js';
-import { CreateStreakResource } from '../sources/typeorm/resources/streak.resource.js';
 import { CreateStudySetResource } from '../sources/typeorm/resources/study-set.resource.js';
-import { CreateStudyTimeResource } from '../sources/typeorm/resources/study-time.resource.js';
-import { CreateSubjectResource } from '../sources/typeorm/resources/subject.resource.js';
-import { CreateSubscriptionResource } from '../sources/typeorm/resources/subscription.resource.js';
-import { CreateDeviceResource } from '../sources/typeorm/resources/device.resource.js';
 
 AdminJS.registerAdapter({ Database: MongooseDatabase, Resource: MongooseResource });
 AdminJS.registerAdapter({ Database: TypeormDatabase, Resource: TypeormResource });
@@ -47,18 +40,11 @@ export const generateAdminJSConfig: () => AdminJSOptions = () => ({
     // typeorm
     CreateUserResource(),
     CreateClassResource(),
-    CreateColorResource(),
-    CreateDeviceResource(),
     CreateFlashcardResource(),
     CreateFolderResource(),
-    CreateImageResource(),
     CreateNotificationResource(),
     CreateReportResource(),
-    CreateStreakResource(),
     CreateStudySetResource(),
-    CreateStudyTimeResource(),
-    CreateSubjectResource(),
-    CreateSubscriptionResource(),
   ],
 });
 
