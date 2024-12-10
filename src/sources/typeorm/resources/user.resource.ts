@@ -9,9 +9,6 @@ export const CreateUserResource: ResourceFunction<typeof Users> = () => ({
   options: {
     navigation: menu.typeorm,
     actions: {
-      edit: {
-        isAccessible: false,
-      },
       delete: {
         isAccessible: false,
       },

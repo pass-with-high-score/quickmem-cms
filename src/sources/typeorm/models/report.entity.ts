@@ -38,9 +38,16 @@ export class Reports extends BaseEntity {
   @ManyToOne(() => Users, (user) => user.reports)
   public reporter: Relation<Users>;
 
+  @ManyToOne(() => Users, (user) => user.ownerOfReportedEntities)
+  public ownerOfReportedEntity: Relation<Users>;
+
   @Column()
   @RelationId((report: Reports) => report.reporter)
   public reporterId: string;
+
+  @Column()
+  @RelationId((report: Reports) => report.ownerOfReportedEntity)
+  public ownerOfReportedEntityId: string;
 
   @CreateDateColumn()
   public createdAt: Date;

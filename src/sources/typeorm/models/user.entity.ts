@@ -19,6 +19,7 @@ import { Notifications } from './notification.entity.js';
 import { Subscriptions } from './subscription.entity.js';
 import { Reports } from './report.entity.js';
 import { Devices } from './device.entity.js';
+import { UserStatusEnum } from '../enums/user-status.enum.js';
 
 @Entity('users')
 export class Users extends BaseEntity {
@@ -86,11 +87,27 @@ export class Users extends BaseEntity {
   @OneToMany(() => Reports, (report) => report.reporter)
   public reports: Reports[];
 
+  @OneToMany(() => Reports, (report) => report.ownerOfReportedEntity)
+  public ownerOfReportedEntities: Reports[];
+
   @OneToMany(() => Devices, (device) => device.user)
   public devices: Devices[];
 
   @ManyToMany(() => Classes, (classEntity) => classEntity.members)
   public classes: Classes[];
+
+  @Column({
+    enum: UserStatusEnum,
+    enumName: 'user_status_enum',
+    default: UserStatusEnum.ACTIVE,
+  })
+  userStatus: UserStatusEnum;
+
+  @Column({ nullable: true })
+  bannedReason: string;
+
+  @Column({ nullable: true })
+  bannedAt: Date;
 
   @CreateDateColumn()
   public createdAt: Date;
